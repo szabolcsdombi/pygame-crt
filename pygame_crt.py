@@ -75,12 +75,12 @@ class CRTScreen:
 
                 vec3 sample_screen(vec2 uv) {
                     if (color_shift == 0.0) {
-                        return texture(Texture, uv).rgb;
+                        return texture(Texture, uv).bgr;
                     }
                     return vec3(
-                        texture(Texture, uv - color_shift).r,
+                        texture(Texture, uv - color_shift).b,
                         texture(Texture, uv).g,
-                        texture(Texture, uv + color_shift).b
+                        texture(Texture, uv + color_shift).r
                     );
                 }
 
@@ -113,7 +113,7 @@ class CRTScreen:
                         if (abs(vertex.x) <= 1.0 || abs(vertex.y) <= 1.0) {
                             vec2 uv = vertex * 0.5 + 0.5;
                             uv.y = 1.0 - uv.y;
-                            out_color = texture(Texture, uv);
+                            out_color = texture(Texture, uv).bgra;
                         } else {
                             out_color = vec4(0.0, 0.0, 0.0, 1.0);
                         }
